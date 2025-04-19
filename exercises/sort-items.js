@@ -1,8 +1,8 @@
 /**
  * SORTING NODES WITHIN A CONTAINER
  * Please, make sure to read the following files in the exercises-info folder before you start
- * * "02 SortingNode.md" 
-*/
+ * * "02 SortingNode.md"
+ */
 
 /**
  * @task
@@ -12,8 +12,7 @@
  */
 
 // Your code goes here...
-
-
+const allItems = document.querySelectorAll(".item");
 
 /**
  * @task
@@ -23,8 +22,7 @@
  */
 
 // Your code goes here...
-
-
+const sortBtn = document.querySelectorAll(".sortBtn");
 
 /**
  * @task
@@ -38,8 +36,23 @@
  */
 
 // Your code goes here...
-
-
+function sortData(direction) {
+  // Defines a container variable to get the node by id of 'main
+  const container = document.getElementById("main");
+  // Uses the allItems variable as a source for the array of items to sort
+  const items = [...allItems];
+  // Sorts the items by id and appends them back to the main container in the sorted order.
+  items.sort((a, b) => {
+    if (direction === "asc") {
+      return a.id.localeCompare(b.id);
+    } else if (direction === "desc") {
+      return b.id.localeCompare(a.id);
+    }
+  });
+  items.forEach((item) => {
+    container.appendChild(item);
+  });
+}
 
 /**
  * @task
@@ -50,5 +63,12 @@
  */
 
 // Your code goes here...
-
-
+//Iterate through the every item in sortBtn NodeList and apply the
+for (let i = 0; i < sortBtn.length; i++) {
+  //addEventListener click event to each item.
+  sortBtn[i].addEventListener("click", function () {
+    //The item click must execute/call the following;
+    // Make the sortData function call, assign the item's dataset sortdir property
+    sortData(this.dataset.sortdir);
+  });
+}
